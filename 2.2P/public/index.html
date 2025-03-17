@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <style>
+        .main-wrapper {
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            max-width: 380px;
+            margin: auto;
+            text-align: center;
+            padding: 50px;
+            border-radius: 25px;
+            border: 1px solid;
+        }
+
+        input {
+            padding: 10px 14px;
+            width: 120px;
+        }
+
+        .input-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .operator {
+            width: 25px;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 12px;
+        }
+
+        .btn-container {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper">
+        <h2>Simple Calculator</h2>
+        <div class="input-container">
+            <input type="number" id="num1" placeholder="Enter first number">
+            <div class="operator" id="operator"></div>
+            <input type="number" id="num2" placeholder="Enter second number"><br>
+        </div>
+        <div class = "btn-container">
+            <button id="add">Add</button>
+        <button id="substract">Substract</button>
+        <button id="multiply">Multiply</button>
+        <button id="divide">Divide</button>
+        </div>
+        <p>Result: <span id="result"></span></p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const num1Input = document.getElementById("num1");
+            const num2Input = document.getElementById("num2");
+            const resultSpan = document.getElementById("result");
+            const addButton = document.getElementById("add");
+            const substractButton = document.getElementById("substract");
+            const multiplyButton = document.getElementById("multiply");
+            const divideButton = document.getElementById("divide");
+
+            addButton.addEventListener("click", function () {
+                const num1 = parseFloat(num1Input.value);
+                const num2 = parseFloat(num2Input.value);
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    resultSpan.innerText = "Invalid input!";
+                    return;
+                }
+
+                document.getElementById("operator").innerHTML = "+";
+
+                fetch(`/api/add?num1=${num1}&num2=${num2}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultSpan.innerText = data.result;
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        resultSpan.innerText = "Error!";
+                    });
+            });
+
+            substractButton.addEventListener("click", function () {
+                const num1 = parseFloat(num1Input.value);
+                const num2 = parseFloat(num2Input.value);
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    resultSpan.innerText = "Invalid input!";
+                    return;
+                }
+
+                document.getElementById("operator").innerHTML = "-";
+
+                fetch(`/api/substract?num1=${num1}&num2=${num2}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultSpan.innerText = data.result;
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        resultSpan.innerText = "Error!";
+                    });
+            });
+
+            multiplyButton.addEventListener("click", function () {
+                const num1 = parseFloat(num1Input.value);
+                const num2 = parseFloat(num2Input.value);
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    resultSpan.innerText = "Invalid input!";
+                    return;
+                }
+
+                document.getElementById("operator").innerHTML = "x";
+
+                fetch(`/api/multiply?num1=${num1}&num2=${num2}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultSpan.innerText = data.result;
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        resultSpan.innerText = "Error!";
+                    });
+            });
+
+            divideButton.addEventListener("click", function () {
+                const num1 = parseFloat(num1Input.value);
+                const num2 = parseFloat(num2Input.value);
+
+                if (isNaN(num1) || isNaN(num2)) {
+                    resultSpan.innerText = "Invalid input!";
+                    return;
+                }
+
+                document.getElementById("operator").innerHTML = "/";
+
+                fetch(`/api/divide?num1=${num1}&num2=${num2}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        resultSpan.innerText = data.result;
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        resultSpan.innerText = "Error!";
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
