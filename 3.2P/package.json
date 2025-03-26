@@ -1,0 +1,19 @@
+{
+  "name": "3.2p",
+  "version": "1.0.0",
+  "description": "Task 3.2P - Bootstrapping Express App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Binara93Lokuliyanage/SIT725.git"
+  },
+  "author": "Binara Lokuliyanage",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
